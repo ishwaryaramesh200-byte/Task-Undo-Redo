@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Undo-Redo</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="input">
+            <input type="text" placeholder="Enter your Text" id="task" autocomplete="off">
+            <button class="add" onclick="addTasks()">Add</button>
+        </div>
+        <p id="wrong" style="display: none;"></p>
+        <div class="buttons">
+            <button id="undo">Undo</button>
+            <button id="redo">Redo</button>
+        </div>
+        <div id="list"></div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
