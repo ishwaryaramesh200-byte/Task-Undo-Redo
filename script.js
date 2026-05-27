@@ -98,25 +98,15 @@ undoBtn.addEventListener('click', () => {
             action.element.remove();
             break;
         case "edit":
-            action.element
-                .querySelector('span')
-                .textContent =
-                action.oldValue;
+            action.element.querySelector('span').textContent =action.oldValue;
             break;
         case "delete":
             const children = listBox.children;
-            if (
-                action.index >= children.length
-            ) {
-                listBox.appendChild(
-                    action.element
-                );
+            if (action.index >= children.length) {
+                listBox.appendChild(action.element);
             }
             else {
-                listBox.insertBefore(
-                    action.element,
-                    children[action.index]
-                );
+                listBox.insertBefore(action.element,children[action.index]);
             }
             break;
     }
@@ -129,15 +119,10 @@ redoBtn.addEventListener('click', () => {
 
     switch (action.type) {
         case "add":
-            listBox.appendChild(
-                action.element
-            );
+            listBox.appendChild(action.element);
             break;
         case "edit":
-            action.element
-                .querySelector('span')
-                .textContent =
-                action.newValue;
+            action.element.querySelector('span').textContent =action.newValue;
             break;
         case "delete":
             action.element.remove();
