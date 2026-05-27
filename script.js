@@ -232,3 +232,13 @@ allSelect.addEventListener('change', (e) => {
         deleteSelectedBtn.style.display = 'none';
     })
 });
+
+// window.addEventListener('keydown', (e) => {
+//     const checkboxes = listBox.querySelectorAll('input[type="checkbox"]');
+//     checkboxes.forEach(checkbox => {
+//         checkbox.checked = e.target.checked;
+//     });
+//     if(e.shiftKey && e.key === "ArrowDown"){
+//         e.target.checked.nextElementSibling.checked = true;
+//     }
+// });
