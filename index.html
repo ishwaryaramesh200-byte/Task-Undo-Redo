@@ -12,12 +12,16 @@
     <div class="container">
         <div class="input">
             <input type="text" placeholder="Enter your Text" id="task" autocomplete="off">
-            <button class="add" onclick="addTasks()">Add</button>
+            <button class="add">Add</button>
         </div>
         <p id="wrong" style="display: none;"></p>
         <div class="buttons">
             <button id="undo">Undo</button>
             <button id="redo">Redo</button>
+        </div>
+        <div class="allSelected">
+            <label><input type="checkbox" id="allSelect">       Select All</label>
+            <button class="deletebtn" style="display: none;" id="deleteSelected">Delete</button>
         </div>
         <div id="list"></div>
     </div>
