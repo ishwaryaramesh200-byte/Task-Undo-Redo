@@ -25,7 +25,6 @@ function addTasks(task) {
     listBox.appendChild(li);
     undoStack.push({
         type: "add",
-        element: li,
         value: task
     });
 }
@@ -60,7 +59,6 @@ function createListItem(task) {
                 span.textContent = newValue;
                 undoStack.push({
                     type: "edit",
-                    element: li,
                     oldValue: oldValue,
                     newValue: newValue
                 });
@@ -78,7 +76,6 @@ function createListItem(task) {
         const index = [...listBox.children].indexOf(li);
         undoStack.push({
             type: "delete",
-            element: li,
             index: index
         });
         li.remove();
