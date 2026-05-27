@@ -18,8 +18,14 @@ addBtn.addEventListener('click', () => {
 
 function addTasks(task) {
     if (!task) {
+        const wrong = document.getElementById('wrong');
+        wrong.style.display = 'block';
+        wrong.style.color = 'red';
+        wrong.style.fontSize = '20px';
+        wrong.textContent = 'Please enter a task.';
         return;
     }
+    wrong.style.display = 'none';
     redoStack.length = 0;
     const li = createListItem(task);
     listBox.appendChild(li);
@@ -74,9 +80,13 @@ function createListItem(task) {
     deleteBtn.addEventListener('click', () => {
         redoStack.length = 0;
         const index = [...listBox.children].indexOf(li);
+        const items = listBox.querySelectorAll('li')[index];
+        const span = items.querySelector('span');
+        const content = span.textContent;
         undoStack.push({
             type: "delete",
-            index: index
+            index: index,
+            content: content
         });
         li.remove();
     });
@@ -87,42 +97,56 @@ undoBtn.addEventListener('click', () => {
     if (!undoStack.length) {
         return;
     }
-
     const action = undoStack.pop();
     redoStack.push(action);
     switch (action.type) {
         case "add":
-            action.element.remove();
+            listBox.removeChild(listBox.lastChild);
             break;
         case "edit":
-            action.element.querySelector('span').textContent =action.oldValue;
+            const items = listBox.querySelectorAll('li');
+            items.forEach(item => {
+                const span = item.querySelector('span');
+                if (span.textContent === action.newValue) {
+                    span.textContent = action.oldValue;
+                }
+            });
             break;
         case "delete":
-            const children = listBox.children;
-            if (action.index >= children.length) {
-                listBox.appendChild(action.element);
-            }
-            else {
-                listBox.insertBefore(action.element,children[action.index]);
-            }
+            const li = createListItem(action.content);
+            listBox.insertBefore(li, listBox.children[action.index]);
             break;
     }
 });
 
 redoBtn.addEventListener('click', () => {
-    if (!redoStack.length) return;
+    if (!redoStack.length) {
+        return;
+    }
     const action = redoStack.pop();
     undoStack.push(action);
-
     switch (action.type) {
         case "add":
-            listBox.appendChild(action.element);
+            const li = createListItem(action.value);
+            listBox.appendChild(li);
             break;
         case "edit":
-            action.element.querySelector('span').textContent =action.newValue;
+            const items = listBox.querySelectorAll('li');
+            items.forEach(item => {
+                const span = item.querySelector('span');
+                if(span.textContent == action.oldValue){
+                    span.textContent =action.newValue;
+                }
+            });
             break;
         case "delete":
-            action.element.remove();
+            const item = listBox.querySelectorAll('li');
+            item.forEach(item => {
+                const span = item.querySelector('span');
+                if(span.textContent == action.content){
+                    item.remove();
+                }
+            });
         break;
     }
 });
