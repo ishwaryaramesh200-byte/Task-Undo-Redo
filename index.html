@@ -12,17 +12,18 @@
     <div class="container">
         <div class="input">
             <input type="text" placeholder="Enter your Text" id="task" autocomplete="off">
-            <button class="add">Add</button>
+            <button class="add" onclick="handleAddClick()">Add</button>
         </div>
         <p id="wrong" style="display: none;"></p>
         <div class="buttons">
-            <button id="undo">Undo</button>
-            <button id="redo">Redo</button>
+            <button id="undo" onclick="handleUndoClick()">Undo</button>
+            <button id="redo" onclick="handleRedoClick()">Redo</button>
         </div>
         <div class="allSelected">
-            <label><input type="checkbox" id="allSelect" class="sepSelector">       Select All</label>
-            <button class="deletebtn" style="display: none;" id="deleteSelected">Delete</button>
+            <label><input type="checkbox" name="allSelect" id="allSelect" class="sepSelector" onchange="handleSelectAllChange(event)">       Select All</label>
+            <button class="deletebtn" style="display: none;" id="deleteSelected" onclick="handleDeleteSelectedClick()">Delete</button>
         </div>
+        <p id="emptyState" class="empty-state">No tasks found</p>
         <div id="list"></div>
     </div>
     <script src="script.js"></script>
